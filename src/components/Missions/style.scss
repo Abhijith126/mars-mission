@@ -1,0 +1,47 @@
+.Missions {
+  &_Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1vmin 0;
+  }
+  &--departure {
+    font-style: italic;
+    &_departed {
+      color: lightcoral;
+    }
+  }
+}
+
+.Mission {
+  &_Title {
+    font-size: large;
+    margin-bottom: 1%;
+  }
+  &_FirstRow {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+  }
+  &_Members {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1%;
+    &--card {
+      padding: 2%;
+      background-color: #f2f2f2;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+    }
+  }
+  &_Actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &--fields {
+    padding-right: 2vmin;
+  }
+}

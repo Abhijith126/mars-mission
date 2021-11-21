@@ -1,0 +1,16 @@
+.App {
+  text-align: left;
+  &__Header {
+    background-color: #282c34;
+    font-size: 16px;
+    color: white;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  &__Body {
+    margin: 5vmin;
+  }
+  &__Footer {
+    margin: 5vmin;
+  }
+}
