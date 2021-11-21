@@ -8,7 +8,7 @@ interface Props {
 const Header: FC<Props> = ({ title }) => {
   return (
     <header className="App__Header">
-      <h1>{title}</h1>
+      <h2>{title}</h2>
     </header>
   );
 };

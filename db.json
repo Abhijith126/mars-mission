@@ -11,73 +11,24 @@
           "experience": 10
         },
         {
-          "type": "Pilot",
-          "experience": 10
-        },
-        {
           "type": "Engineer",
           "job": "Spares",
           "experience": 5
         },
         {
           "type": "Engineer",
-          "job": "Spares",
+          "job": "Solar panels",
           "experience": 5
         },
         {
           "type": "Engineer",
-          "job": "Spares",
+          "job": "Maintenance",
           "experience": 5
         },
         {
           "type": "Engineer",
-          "job": "Spares",
+          "job": "Mechanics",
           "experience": 5
-        },
-        {
-          "type": "Engineer",
-          "job": "Spares",
-          "experience": 5
-        },
-        {
-          "type": "Engineer",
-          "job": "Spares",
-          "experience": 5
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
-        },
-        {
-          "type": "Passenger",
-          "age": 26,
-          "wealth": "5 cr"
         },
         {
           "type": "Passenger",
@@ -162,20 +113,6 @@
         {
           "type": "Pilot",
           "experience": 10
-        },
-        {
-          "type": "Pilot",
-          "experience": 10
-        },
-        {
-          "type": "Engineer",
-          "job": "Spares",
-          "experience": 5
-        },
-        {
-          "type": "Engineer",
-          "job": "Spares",
-          "experience": 5
         },
         {
           "type": "Engineer",
@@ -315,28 +252,6 @@
           "wealth": "5 cr"
         }
       ]
-    },
-    {
-      "name": "9088",
-      "members": [
-        {
-          "type": "Pilot",
-          "experience": 33
-        },
-        {
-          "type": "Engineer",
-          "experience": 22,
-          "job": "Maintenance"
-        },
-        {
-          "type": "Passenger",
-          "age": 22,
-          "wealth": "222"
-        }
-      ],
-      "destination": "huo",
-      "departure": "2040-11-09",
-      "id": 5
     }
   ]
 }

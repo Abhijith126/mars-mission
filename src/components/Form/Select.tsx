@@ -1,6 +1,6 @@
-import { SelectField } from 'evergreen-ui';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
+import './styles.scss';
 
 interface SelectProps {
   name: string;
@@ -15,19 +15,19 @@ interface SelectProps {
 }
 
 const Select = (props: SelectProps) => {
-  const { name, label, options, disabled } = props;
+  const { name, label, options, disabled, required, className } = props;
   const [field, meta] = useField(props);
   const error = meta.touched && meta.error ? meta.error : null;
   return (
     <div className="Mission--fields">
-      <SelectField
+      <label className="Input--label" htmlFor={name}>
+        {label} {required ? ' *' : ''}
+      </label>
+      <select
         {...props}
-        isInvalid={!!error}
-        marginBottom={8}
-        label={label}
+        className={className + ' Input Input_Select'}
         name={name}
         value={field.value || ''}
-        validationMessage={error}
         disabled={disabled}
       >
         {options.map((option: any, i: number) => (
@@ -35,7 +35,8 @@ const Select = (props: SelectProps) => {
             {option}
           </option>
         ))}
-      </SelectField>
+      </select>
+      <p className="Input--error">{error}</p>
     </div>
   );
 };

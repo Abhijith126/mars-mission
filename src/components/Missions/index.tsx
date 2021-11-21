@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button } from 'evergreen-ui';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import MissionTable from './table';
 import { RootState } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +7,7 @@ import { getAllMissions } from '../../store/actions/missionsActions';
 import './style.scss';
 import { setMissionData } from '../../store/actions/missionActions';
 import { initialValues } from './validations';
+import Button from '../Form/Button';
 
 const MissionList = () => {
   const dispatch = useDispatch();
@@ -25,14 +24,11 @@ const MissionList = () => {
       <div className="Missions_Header">
         <p>Missions</p>
         <Button
-          marginRight={16}
+          name="New Mission"
           onClick={clearMission}
-          is={Link}
-          to="/mission/new"
-          intent="primary"
-        >
-          New Mission
-        </Button>
+          redirect="/mission/new"
+          appearance="success"
+        />
       </div>
       {missions && <MissionTable missions={missions} />}
     </div>

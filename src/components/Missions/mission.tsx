@@ -1,12 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  AddIcon,
-  Button,
-  IconButton,
-  majorScale,
-  TrashIcon,
-  UndoIcon,
-} from 'evergreen-ui';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,9 +14,10 @@ import { Jobs, MemberType } from '../../constants';
 import { Member, MissionData } from '../../store/types';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
-import { Link } from 'react-router-dom';
 import { setAlert } from '../../store/actions/alertActions';
 import { useNavigate } from 'react-router-dom';
+import Button from '../Form/Button';
+import IconButton from '../Form/IconButton';
 
 const Mission: FC = () => {
   const navigate = useNavigate();
@@ -209,11 +202,9 @@ const Mission: FC = () => {
                         )}
                         <IconButton
                           type="button"
-                          icon={TrashIcon}
+                          icon="delete"
                           onClick={() => deleteMember(index, props)}
-                          intent="danger"
-                          marginRight={majorScale(2)}
-                          marginTop={majorScale(2)}
+                          appearance="danger"
                         />
                       </div>
                     ),
@@ -222,36 +213,26 @@ const Mission: FC = () => {
               )}
             />
             <Button
+              name="New Member"
               type="button"
               onClick={() => addMember(props)}
-              marginY={8}
-              marginRight={12}
-              iconAfter={AddIcon}
-            >
-              New Member
-            </Button>
+              icon="add"
+            />
           </div>
           <div className="Mission_Actions">
             <Button
+              name="Cancel"
               type="button"
-              appearance="default"
-              marginY={8}
-              marginRight={12}
-              iconAfter={UndoIcon}
-              is={Link}
-              to="/mission"
-            >
-              Cancel
-            </Button>
+              redirect="/mission/"
+              icon="back"
+              appearance="danger"
+            />
             <Button
+              name={isEdit ? 'Edit Mission' : 'Create Mission'}
               type="submit"
               appearance="primary"
-              marginY={8}
-              marginRight={12}
-              iconAfter={AddIcon}
-            >
-              {isEdit ? 'Edit' : 'Create'} Mission
-            </Button>
+              icon="add"
+            />
           </div>
         </Form>
       )}

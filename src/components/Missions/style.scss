@@ -11,12 +11,17 @@
       color: lightcoral;
     }
   }
+  &_Actions {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .Mission {
   &_Title {
     font-size: large;
-    margin-bottom: 1%;
+    padding-bottom: 1%;
+    border-bottom: solid 1px lightgray;
   }
   &_FirstRow {
     display: flex;
@@ -28,9 +33,10 @@
     flex-direction: row;
     align-items: center;
     margin-bottom: 1%;
+    border-bottom: solid 1px lightgray;
     &--card {
-      padding: 2%;
-      background-color: #f2f2f2;
+      padding: 0% 2%;
+      background-color: #faf4f4;
       border: 1px solid lightgrey;
       border-radius: 5px;
     }
@@ -43,5 +49,35 @@
   }
   &--fields {
     padding-right: 2vmin;
+  }
+}
+
+.MissionList {
+  border-collapse: separate;
+  border: solid lightgray 1px;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+
+  thead {
+    border-radius: 6px;
+    background-color: #f2f2f2;
+  }
+
+  input {
+    padding: 6px;
+    border-radius: 6px;
+    border: solid 1px lightgray;
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+    border-bottom: solid lightgray 1px;
+    padding: 4px;
+
+    p {
+      margin: 4px;
+    }
   }
 }

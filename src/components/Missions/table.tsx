@@ -1,20 +1,14 @@
-import {
-  EditIcon,
-  IconButton,
-  majorScale,
-  Table,
-  TrashIcon,
-} from 'evergreen-ui';
 import moment from 'moment';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   deleteMissionById,
   setMissionData,
 } from '../../store/actions/missionActions';
 import { getAllMissions } from '../../store/actions/missionsActions';
 import { MissionData, MissionsData } from '../../store/types';
+import IconButton from '../Form/IconButton';
+import './style.scss';
 
 interface Props {
   missions: MissionsData;
@@ -70,59 +64,62 @@ const MissionTable: FC<Props> = ({ missions }) => {
   };
 
   return (
-    <Table>
-      <Table.Head>
-        <Table.SearchHeaderCell
-          onChange={filterMissions}
-          placeholder="Search by name..."
-        />
-        <Table.TextHeaderCell>Members</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Destination</Table.TextHeaderCell>
-        <Table.TextHeaderCell>Departure</Table.TextHeaderCell>
-        <Table.TextHeaderCell></Table.TextHeaderCell>
-      </Table.Head>
-      <Table.Body>
+    <table className="MissionList">
+      <thead>
+        <tr>
+          <th>
+            <input
+              name="search"
+              onChange={(e) => filterMissions(e.target.value)}
+              placeholder="Search by name..."
+            />
+          </th>
+          <th>Members</th>
+          <th>Destination</th>
+          <th>Departure</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         {missionsState &&
           missionsState?.map((mission: any) => (
-            <Table.Row key={mission.id} isSelectable>
-              <Table.TextCell>{mission.name}</Table.TextCell>
-              <Table.TextCell isNumber>{mission.members.length}</Table.TextCell>
-              <Table.TextCell>{mission.destination}</Table.TextCell>
-              <Table.TextCell>
+            <tr key={mission.id}>
+              <td width="20%">{mission.name}</td>
+              <td width="20%">{mission.members.length}</td>
+              <td width="20%">{mission.destination}</td>
+              <td>
                 <div>
                   <p>{moment(mission.departure).format('DD/MM/YYYY')}</p>
                   <p className={getDepartedClass(mission.departure)}>
                     {getDepartureDays(mission.departure)}
                   </p>
                 </div>
-              </Table.TextCell>
-              <Table.TextCell>
-                <IconButton
-                  type="button"
-                  icon={EditIcon}
-                  is={Link}
-                  to={`/mission/${mission.id}`}
-                  onClick={() => {
-                    editMissionDetails(mission);
-                  }}
-                  intent="primary"
-                  marginRight={majorScale(2)}
-                />
-
-                <IconButton
-                  type="button"
-                  icon={TrashIcon}
-                  onClick={() => {
-                    deleteMissionDetails(mission.id);
-                  }}
-                  intent="danger"
-                  marginRight={majorScale(2)}
-                />
-              </Table.TextCell>
-            </Table.Row>
+              </td>
+              <td>
+                <div className="Missions_Actions">
+                  <IconButton
+                    type="button"
+                    icon="edit"
+                    redirect={`/mission/${mission.id}`}
+                    onClick={() => {
+                      editMissionDetails(mission);
+                    }}
+                    appearance="default"
+                  />
+                  <IconButton
+                    type="button"
+                    icon="delete"
+                    onClick={() => {
+                      deleteMissionDetails(mission.id);
+                    }}
+                    appearance="danger"
+                  />
+                </div>
+              </td>
+            </tr>
           ))}
-      </Table.Body>
-    </Table>
+      </tbody>
+    </table>
   );
 };
 
