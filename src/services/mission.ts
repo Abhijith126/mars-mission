@@ -1,5 +1,5 @@
 import { API } from '../constants';
-import { MissionData } from '../store/types';
+import { MissionData } from '../util/types';
 
 const headers = new Headers({ 'content-type': 'application/json' });
 

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +18,7 @@ import {
   Passenger,
   Pilot,
 } from '../../constants';
-import { Member, MissionData } from '../../store/types';
+import { Member, MissionData } from '../../util/types';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
 import { setAlert } from '../../store/actions/alertActions';

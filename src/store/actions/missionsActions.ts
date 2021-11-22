@@ -7,7 +7,7 @@ import {
   MissionError,
   GET_ALL_MISSION,
   SET_ERROR,
-} from '../types';
+} from '../../util/types';
 
 export const getAllMissions = (): ThunkAction<
   void,

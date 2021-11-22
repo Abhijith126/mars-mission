@@ -6,7 +6,7 @@ import {
   setMissionData,
 } from '../../store/actions/missionActions';
 import { getAllMissions } from '../../store/actions/missionsActions';
-import { MissionData, MissionsData } from '../../store/types';
+import { MissionData, MissionsData } from '../../util/types';
 import { t } from '../../util';
 import IconButton from '../Form/IconButton';
 import './style.scss';

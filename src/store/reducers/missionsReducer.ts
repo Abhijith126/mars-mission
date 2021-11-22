@@ -1,4 +1,4 @@
-import { MissionsState, MissionsAction, GET_ALL_MISSION } from '../types';
+import { MissionsState, MissionsAction, GET_ALL_MISSION } from '../../util/types';
 
 const initialState: MissionsState = {
   data: null,

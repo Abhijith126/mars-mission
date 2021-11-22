@@ -8,7 +8,7 @@ import { setError } from './store/actions/missionActions';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MissionList from './components/Missions/index';
-import Mission from './components/Missions/mission';
+import MissionFormPage from './pages/MissionFormPage';
 import Alert from './components/Alert';
 import './App.scss';
 import { t } from './util';
@@ -25,8 +25,8 @@ const App: FC = () => {
         <div className="App__Body">
           <Routes>
             <Route path="mission" element={<MissionList />} />
-            <Route path="mission/new" element={<Mission />} />
-            <Route path="mission/:missionId" element={<Mission />} />
+            <Route path="mission/new" element={<MissionFormPage />} />
+            <Route path="mission/:missionId" element={<MissionFormPage />} />
             <Route path="/" element={<MissionList />} />
           </Routes>
         </div>

@@ -17,7 +17,7 @@ import {
   DELETE_MISSION,
   UPDATE_MISSION,
   ADD_MISSION,
-} from '../types';
+} from '../../util/types';
 
 export const getMissionById = (
   missionId: string,

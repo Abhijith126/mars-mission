@@ -8,7 +8,7 @@ import {
   SET_ERROR,
   SET_MISSION,
   ADD_MISSION,
-} from '../types';
+} from '../../util/types';
 
 const initialState: MissionState = {
   data: null,
