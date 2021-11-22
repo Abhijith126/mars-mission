@@ -6,48 +6,50 @@ import {
   DELETE_MISSION,
   SET_LOADING,
   SET_ERROR,
-  SET_MISSION,
   ADD_MISSION,
+  GET_ALL_MISSION,
 } from '../../util/types';
 
 const initialState: MissionState = {
-  data: null,
+  mission: null,
+  allMissions: [],
   loading: false,
   error: '',
 };
 
-const missionReducer = (
-  state = initialState,
-  action: MissionAction,
-): MissionState => {
+const missionReducer = (state = initialState, action: MissionAction): MissionState => {
   switch (action.type) {
-    case GET_MISSION:
+    case GET_ALL_MISSION:
       return {
-        data: action.payload,
+        ...state,
+        allMissions: action.payload,
+        mission: null,
         loading: false,
         error: '',
       };
-    case SET_MISSION:
+    case GET_MISSION:
       return {
-        data: action.payload,
+        ...state,
+        mission: action.payload,
         loading: false,
         error: '',
       };
     case UPDATE_MISSION:
       return {
-        data: action.payload,
+        ...state,
+        mission: action.payload,
         loading: false,
         error: '',
       };
     case DELETE_MISSION:
       return {
-        data: null,
+        ...state,
         loading: false,
         error: '',
       };
     case ADD_MISSION:
       return {
-        data: null,
+        ...state,
         loading: false,
         error: '',
       };

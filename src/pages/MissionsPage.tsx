@@ -1,4 +1,4 @@
-import MissionTable from '../components/Missions/table';
+import MissionTable from '../components/Missions/Table';
 import Button from '../components/Form/Button';
 import { t } from '../util';
 

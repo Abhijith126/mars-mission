@@ -1,11 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '..';
-import {
-  fetchMission,
-  updateMission,
-  deleteMission,
-  createMission,
-} from '../../services/mission';
+import { fetchMission, updateMission, deleteMission, createMission, fetchAllMissions } from '../../services/mission';
 import {
   MissionAction,
   MissionData,
@@ -17,11 +12,34 @@ import {
   DELETE_MISSION,
   UPDATE_MISSION,
   ADD_MISSION,
+  GET_ALL_MISSION,
 } from '../../util/types';
 
-export const getMissionById = (
-  missionId: string,
-): ThunkAction<void, RootState, null, MissionAction> => {
+export const getAllMissions = (): ThunkAction<void, RootState, null, MissionAction> => {
+  return async (dispatch) => {
+    try {
+      const res = await fetchAllMissions();
+
+      if (!res.ok) {
+        const resData: MissionError = await res.json();
+        throw new Error(resData.message);
+      }
+
+      const resData: MissionData[] = await res.json();
+      dispatch({
+        type: GET_ALL_MISSION,
+        payload: resData,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: SET_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+};
+
+export const getMissionById = (missionId: string): ThunkAction<void, RootState, null, MissionAction> => {
   return async (dispatch) => {
     try {
       const res = await fetchMission(missionId);
@@ -45,10 +63,7 @@ export const getMissionById = (
   };
 };
 
-export const updateMissionById = (
-  missionId: string,
-  mission: MissionData,
-): ThunkAction<void, RootState, null, MissionAction> => {
+export const updateMissionById = (missionId: string, mission: MissionData): ThunkAction<void, RootState, null, MissionAction> => {
   return async (dispatch) => {
     try {
       const res = await updateMission(missionId, mission);
@@ -72,9 +87,7 @@ export const updateMissionById = (
   };
 };
 
-export const createNewMission = (
-  mission: MissionData,
-): ThunkAction<void, RootState, null, MissionAction> => {
+export const createNewMission = (mission: MissionData): ThunkAction<void, RootState, null, MissionAction> => {
   return async (dispatch) => {
     try {
       const res = await createMission(mission);
@@ -98,9 +111,7 @@ export const createNewMission = (
   };
 };
 
-export const deleteMissionById = (
-  missionId: string,
-): ThunkAction<void, RootState, null, MissionAction> => {
+export const deleteMissionById = (missionId: string): ThunkAction<void, RootState, null, MissionAction> => {
   return async (dispatch) => {
     try {
       const res = await deleteMission(missionId);
@@ -124,9 +135,7 @@ export const deleteMissionById = (
   };
 };
 
-export const setMissionData = (
-  missionData: MissionData,
-): ThunkAction<void, RootState, null, MissionAction> => {
+export const setMissionData = (missionData: MissionData): ThunkAction<void, RootState, null, MissionAction> => {
   return (dispatch) => {
     dispatch({
       type: SET_MISSION,

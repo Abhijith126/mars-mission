@@ -13,6 +13,7 @@ const missions = {
       months: 'months',
       search: 'Search by name...',
     },
+    noRecords: 'No records to display',
   },
   form: {
     titles: { new: 'Configure a new mission', edit: 'Edit mission' },

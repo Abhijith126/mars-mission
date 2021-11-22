@@ -2,57 +2,32 @@ import { Formik, Form, Field } from 'formik';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { initialValues, validationSchema } from '../components/Missions/validations';
+import { validateMission, validationSchema } from '../components/Missions/validations';
 import { createNewMission, getMissionById, updateMissionById } from '../store/actions/missionActions';
 import { RootState } from '../store';
-import { Engineer, Passenger, Pilot } from '../constants';
-import { Member, MissionData } from '../util/types';
+import { MissionData } from '../util/types';
 import Input from '../components/Form/Input';
-import { setAlert } from '../store/actions/alertActions';
 import Button from '../components/Form/Button';
-import MemberForm from '../components/MemberForm';
+import MemberForm from '../components/Missions/MemberForm';
 import { t } from '../util';
+import { initialValues } from '../components/Missions/helpers';
 
 const Mission: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  
+
   const missionId = params?.missionId;
   const isEdit = !!missionId;
-  const mission = useSelector((state: RootState) => state.mission.data);
+  const mission = useSelector((state: RootState) => state.mission.mission);
 
   useEffect(() => {
     isEdit && dispatch(getMissionById(missionId));
   }, [missionId]);
 
-  const getPilots = (members: Member[]) => members.filter((e: Member) => e.type === Pilot.value);
-  const getEngineers = (members: Member[]) => members.filter((e: Member) => e.type === Engineer.value);
-  const getPassengers = (members: Member[]) => members.filter((e: Member) => e.type === Passenger.value);
-  const getAssignedJobs = (members: Member[]) => getEngineers(members).map((engineer: Member) => engineer.job);
+  const onSubmit = (values: MissionData) => {
+    const valid = validateMission(values, dispatch);
 
-  const validateDetails = (mission: MissionData) => {
-    const members = mission.members;
-    const pilots = getPilots(members);
-    const jobs = getAssignedJobs(members);
-    const uniqJobs = Array.from(new Set(jobs));
-    if (pilots.length === 0) {
-      dispatch(setAlert(t('missions.form.errors.min1Pilot')));
-      return false;
-    }
-    if (getPassengers(members).length === 0) {
-      dispatch(setAlert(t('missions.form.errors.min1Passenger')));
-      return false;
-    }
-    if (jobs.length !== uniqJobs.length) {
-      dispatch(setAlert(t('missions.form.errors.uniqueJobs')));
-      return false;
-    }
-    return true;
-  };
-
-  const onSubmit = (values: any) => {
-    const valid = validateDetails(values);
     if (valid) {
       if (isEdit) {
         dispatch(updateMissionById(missionId, values));
@@ -105,7 +80,7 @@ const Mission: FC = () => {
           <MemberForm formProps={props} />
           <div className="Mission_Actions">
             <Button name={t('missions.buttons.cancel')} type="button" redirect="/" />
-            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary"/>
+            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary" />
           </div>
         </Form>
       )}

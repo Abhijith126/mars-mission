@@ -1,17 +1,17 @@
 import moment from 'moment';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMissionById, setMissionData } from '../../store/actions/missionActions';
-import { getAllMissions } from '../../store/actions/missionsActions';
+import { deleteMissionById, getAllMissions, setMissionData } from '../../store/actions/missionActions';
 import { MissionData } from '../../util/types';
 import { t } from '../../util';
 import IconButton from '../Form/IconButton';
 import './style.scss';
 import { RootState } from '../../store';
+import { daysDiff, getDepartureDays } from './helpers';
 
 const MissionTable: FC = () => {
   const dispatch = useDispatch();
-  const missions = useSelector((state: RootState) => state.missions.data);
+  const missions = useSelector((state: RootState) => state.mission.allMissions);
   const [filteredMissions, setFilteredMissions] = useState<MissionData[]>([]);
 
   useEffect(() => {
@@ -26,28 +26,16 @@ const MissionTable: FC = () => {
     dispatch(setMissionData(mission));
   };
 
-  const deleteMissionDetails = (missionId: string) => {
-    dispatch(deleteMissionById(missionId));
-    dispatch(getAllMissions());
+  const deleteMissionDetails = (missionId?: string) => {
+    if (missionId) {
+      dispatch(deleteMissionById(missionId));
+      dispatch(getAllMissions());
+    }
   };
 
   const filterMissions = (missionName: string) => {
     const tempMissions = missions?.filter((m: MissionData) => m.name.toLowerCase().includes(missionName.toLowerCase())) || [];
     setFilteredMissions(tempMissions);
-  };
-
-  const daysDiff = (departureDate: string) => moment(new Date(departureDate)).diff(new Date(), 'days');
-  const monthDiff = (departureDate: string) => moment(new Date(departureDate)).diff(new Date(), 'months');
-
-  const getDepartureDays = (departureDate: string) => {
-    const daysDif = daysDiff(departureDate);
-    const monthsDiff = monthDiff(departureDate);
-
-    return daysDif > 0
-      ? monthsDiff > 3
-        ? ` in ${monthsDiff} ${t('missions.table.text.months')}`
-        : ` in ${daysDif} ${t('missions.table.text.days')}`
-      : t('missions.table.text.departed');
   };
 
   const getDepartedClass = (departureDate: string) => {
@@ -60,7 +48,11 @@ const MissionTable: FC = () => {
       <thead>
         <tr>
           <th>
-            <input name="search" onChange={(e) => filterMissions(e.target.value)} placeholder={t('missions.table.text.search')} />
+            <input
+              name="search"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => filterMissions(e.target.value)}
+              placeholder={t('missions.table.text.search')}
+            />
           </th>
           <th>{t('missions.table.members')}</th>
           <th>{t('missions.table.destination')}</th>
@@ -70,7 +62,7 @@ const MissionTable: FC = () => {
       </thead>
       <tbody>
         {filteredMissions?.length ? (
-          filteredMissions.map((mission: any) => (
+          filteredMissions.map((mission: MissionData) => (
             <tr key={mission.id}>
               <td width="20%">{mission.name}</td>
               <td width="20%">{mission.members.length}</td>
@@ -83,23 +75,8 @@ const MissionTable: FC = () => {
               </td>
               <td>
                 <div className="Missions_Actions">
-                  <IconButton
-                    type="button"
-                    icon="edit"
-                    redirect={`/mission/${mission.id}`}
-                    onClick={() => {
-                      editMissionDetails(mission);
-                    }}
-                    appearance="default"
-                  />
-                  <IconButton
-                    type="button"
-                    icon="delete"
-                    onClick={() => {
-                      deleteMissionDetails(mission.id);
-                    }}
-                    appearance="danger"
-                  />
+                  <IconButton type="button" icon="edit" redirect={`/mission/${mission.id}`} onClick={() => editMissionDetails(mission)} appearance="default" />
+                  <IconButton type="button" icon="delete" onClick={() => deleteMissionDetails(mission?.id)} appearance="danger" />
                 </div>
               </td>
             </tr>
@@ -107,7 +84,7 @@ const MissionTable: FC = () => {
         ) : (
           <tr>
             <td colSpan={5} className="MissionList--no-records">
-              No records to display
+              {t('missions.table.noRecords')}
             </td>
           </tr>
         )}

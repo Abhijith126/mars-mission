@@ -1,13 +1,13 @@
 import { FC, ChangeEvent } from 'react';
 import { Field, FieldArray, FormikProps } from 'formik';
-import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../constants';
-import { t } from '../util';
-import Button from './Form/Button';
-import IconButton from './Form/IconButton';
-import Input from './Form/Input';
-import Select from './Form/Select';
-import { defaultMembers } from './Missions/validations';
-import { Member, MissionFormValueTypes } from '../util/types';
+import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../../constants';
+import { t } from '../../util';
+import Button from '../Form/Button';
+import IconButton from '../Form/IconButton';
+import Input from '../Form/Input';
+import Select from '../Form/Select';
+import { Member, MissionFormValueTypes } from '../../util/types';
+import { defaultMembers, getPassengers } from './helpers';
 
 interface MemberFormProps {
   formProps: FormikProps<MissionFormValueTypes>;
@@ -22,8 +22,6 @@ const MemberForm: FC<MemberFormProps> = (props: MemberFormProps) => {
     updatedMembers[index] = defaultMembers[currentMemberType.toLowerCase()];
     setFieldValue('members', updatedMembers);
   };
-
-  const getPassengers = (members: Member[]) => members.filter((e: Member) => e.type === Passenger.value);
 
   const addMember = () => {
     members?.push(defaultMembers.passenger);

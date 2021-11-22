@@ -5,7 +5,6 @@ import { RootState } from './store';
 import { setAlert } from './store/actions/alertActions';
 import { setError } from './store/actions/missionActions';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import MissionFormPage from './pages/MissionFormPage';
 import MissionsPage from './pages/MissionsPage';
 import Alert from './components/Alert';
@@ -34,7 +33,6 @@ const App: FC = () => {
         {error && (
           <Alert message={error} onClose={() => dispatch(setError())} />
         )}
-        <Footer />
       </div>
     </Router>
   );

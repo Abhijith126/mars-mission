@@ -25,13 +25,8 @@ export interface MissionData {
 }
 
 export interface MissionState {
-  data: MissionData | null;
-  loading: boolean;
-  error: string;
-}
-
-export interface MissionsState {
-  data: MissionData[] | null;
+  mission: MissionData | null;
+  allMissions: MissionData[] | null;
   loading: boolean;
   error: string;
 }
@@ -80,12 +75,8 @@ export type MissionAction =
   | DeleteMissionAction
   | SetMissionAction
   | SetLoadingAction
-  | SetErrorAction;
-
-export type MissionsAction =
-  | GetMissionsAction
-  | SetLoadingAction
-  | SetErrorAction;
+  | SetErrorAction
+  | GetMissionsAction;
 
 export interface AlertAction {
   type: typeof SET_ALERT;
