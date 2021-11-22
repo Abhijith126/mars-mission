@@ -23,11 +23,10 @@ const App: FC = () => {
       <div className="App">
         <Header title={t('title')} />
         <div className="App__Body">
-          <Routes>
-            <Route path="mission" element={<MissionList />} />
-            <Route path="mission/new" element={<MissionFormPage />} />
-            <Route path="mission/:missionId" element={<MissionFormPage />} />
+          <Routes>            
             <Route path="/" element={<MissionList />} />
+              <Route path="mission" element={<MissionFormPage />} />
+              <Route path="mission/:missionId" element={<MissionFormPage />} />
           </Routes>
         </div>
         {alertMsg && (

@@ -104,7 +104,7 @@ const MemberForm: FC<MemberFormProps> = (props: MemberFormProps) => {
           </>
         )}
       />
-      <Button name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} icon="add" />
+      <Button name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} />
     </div>
   );
 };

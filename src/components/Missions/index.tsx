@@ -27,7 +27,7 @@ const MissionList = () => {
         <Button
           name={t('missions.buttons.new')}
           onClick={clearMission}
-          redirect="/mission/new"
+          redirect="/mission"
           appearance="primary"
           icon="add"
         />

@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { initialValues, validationSchema } from '../components/Missions/validations';
 import { createNewMission, getMissionById, updateMissionById } from '../store/actions/missionActions';
 import { RootState } from '../store';
-import { Engineer, NewMission, Passenger, Pilot } from '../constants';
+import { Engineer, Passenger, Pilot } from '../constants';
 import { Member, MissionData } from '../util/types';
 import Input from '../components/Form/Input';
 import { setAlert } from '../store/actions/alertActions';
@@ -16,14 +16,14 @@ import { t } from '../util';
 const Mission: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const mission = useSelector((state: RootState) => state.mission.data);
   const params = useParams();
-  const missionId: string = params.missionId || NewMission;
-  const isEdit = missionId !== NewMission;
+  
+  const missionId = params?.missionId;
+  const isEdit = !!missionId;
+  const mission = useSelector((state: RootState) => state.mission.data);
 
   useEffect(() => {
     isEdit && dispatch(getMissionById(missionId));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionId]);
 
   const getPilots = (members: Member[]) => members.filter((e: Member) => e.type === Pilot.value);
@@ -56,11 +56,10 @@ const Mission: FC = () => {
     if (valid) {
       if (isEdit) {
         dispatch(updateMissionById(missionId, values));
-        navigate('/mission');
       } else {
         dispatch(createNewMission(values));
-        navigate('/mission');
       }
+      navigate('/');
     }
   };
 
@@ -105,8 +104,8 @@ const Mission: FC = () => {
           </div>
           <MemberForm formProps={props} />
           <div className="Mission_Actions">
-            <Button name={t('missions.buttons.cancel')} type="button" redirect="/mission/" icon="back" appearance="danger" />
-            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary" icon="add" />
+            <Button name={t('missions.buttons.cancel')} type="button" redirect="/" />
+            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary"/>
           </div>
         </Form>
       )}

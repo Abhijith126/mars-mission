@@ -45,21 +45,11 @@ const IconButton = (props: InputProps) => {
   return (
     <div className="Mission--fields">
       {redirect ? (
-        <Link
-          {...props}
-          to={redirect}
-          onClick={onClick}
-          className={prepareClassName() + ' Button_Link'}
-        >
+        <Link {...props} to={redirect} onClick={onClick} className={prepareClassName() + ' Button_Link'}>
           <i className={getIconName()}></i>
         </Link>
       ) : (
-        <button
-          {...props}
-          onClick={onClick}
-          type={type}
-          className={prepareClassName()}
-        >
+        <button {...props} onClick={onClick} type={type} className={prepareClassName()}>
           <i className={getIconName()}></i>
         </button>
       )}

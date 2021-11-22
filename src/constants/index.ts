@@ -1,6 +1,5 @@
 export const API = 'http://localhost:5000';
 
-export const NewMission = 'new';
 export const Pilot = { key: 'PILOT', value: 'Pilot' };
 export const Engineer = { key: 'ENGINEER', value: 'Engineer' };
 export const Passenger = { key: 'PASSENGER', value: 'Passenger' };
