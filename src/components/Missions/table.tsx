@@ -1,30 +1,26 @@
 import moment from 'moment';
 import { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  deleteMissionById,
-  setMissionData,
-} from '../../store/actions/missionActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteMissionById, setMissionData } from '../../store/actions/missionActions';
 import { getAllMissions } from '../../store/actions/missionsActions';
-import { MissionData, MissionsData } from '../../util/types';
+import { MissionData } from '../../util/types';
 import { t } from '../../util';
 import IconButton from '../Form/IconButton';
 import './style.scss';
+import { RootState } from '../../store';
 
-interface Props {
-  missions: MissionsData;
-}
-
-const MissionTable: FC<Props> = ({ missions }) => {
-  const [initialMissions, setInitialMissions] = useState<MissionsData>([]);
-  const [missionsState, setMissions] = useState<MissionsData>([]);
+const MissionTable: FC = () => {
+  const dispatch = useDispatch();
+  const missions = useSelector((state: RootState) => state.missions.data);
+  const [filteredMissions, setFilteredMissions] = useState<MissionData[]>([]);
 
   useEffect(() => {
-    setInitialMissions(missions);
-    setMissions(missions);
-  }, [missions]);
+    dispatch(getAllMissions());
+  }, []);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    missions && setFilteredMissions(missions);
+  }, [missions]);
 
   const editMissionDetails = (mission: MissionData) => {
     dispatch(setMissionData(mission));
@@ -36,17 +32,12 @@ const MissionTable: FC<Props> = ({ missions }) => {
   };
 
   const filterMissions = (missionName: string) => {
-    const filteredMissions = initialMissions.filter((mission) =>
-      mission.name.includes(missionName),
-    );
-    setMissions(filteredMissions);
+    const tempMissions = missions?.filter((m: MissionData) => m.name.toLowerCase().includes(missionName.toLowerCase())) || [];
+    setFilteredMissions(tempMissions);
   };
 
-  const daysDiff = (departureDate: string) =>
-    moment(new Date(departureDate)).diff(new Date(), 'days');
-
-  const monthDiff = (departureDate: string) =>
-    moment(new Date(departureDate)).diff(new Date(), 'months');
+  const daysDiff = (departureDate: string) => moment(new Date(departureDate)).diff(new Date(), 'days');
+  const monthDiff = (departureDate: string) => moment(new Date(departureDate)).diff(new Date(), 'months');
 
   const getDepartureDays = (departureDate: string) => {
     const daysDif = daysDiff(departureDate);
@@ -69,11 +60,7 @@ const MissionTable: FC<Props> = ({ missions }) => {
       <thead>
         <tr>
           <th>
-            <input
-              name="search"
-              onChange={(e) => filterMissions(e.target.value)}
-              placeholder={t('missions.table.text.search')}
-            />
+            <input name="search" onChange={(e) => filterMissions(e.target.value)} placeholder={t('missions.table.text.search')} />
           </th>
           <th>{t('missions.table.members')}</th>
           <th>{t('missions.table.destination')}</th>
@@ -82,8 +69,8 @@ const MissionTable: FC<Props> = ({ missions }) => {
         </tr>
       </thead>
       <tbody>
-        {missionsState?.length ? (
-          missionsState.map((mission: any) => (
+        {filteredMissions?.length ? (
+          filteredMissions.map((mission: any) => (
             <tr key={mission.id}>
               <td width="20%">{mission.name}</td>
               <td width="20%">{mission.members.length}</td>
@@ -91,9 +78,7 @@ const MissionTable: FC<Props> = ({ missions }) => {
               <td>
                 <div>
                   <p>{moment(mission.departure).format('DD/MM/YYYY')}</p>
-                  <p className={getDepartedClass(mission.departure)}>
-                    {getDepartureDays(mission.departure)}
-                  </p>
+                  <p className={getDepartedClass(mission.departure)}>{getDepartureDays(mission.departure)}</p>
                 </div>
               </td>
               <td>
@@ -121,7 +106,9 @@ const MissionTable: FC<Props> = ({ missions }) => {
           ))
         ) : (
           <tr>
-            <td colSpan={5} className="MissionList--no-records">No records to display</td>
+            <td colSpan={5} className="MissionList--no-records">
+              No records to display
+            </td>
           </tr>
         )}
       </tbody>

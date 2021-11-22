@@ -24,8 +24,6 @@ export interface MissionData {
   departure: string;
 }
 
-export type MissionsData = MissionData[];
-
 export interface MissionState {
   data: MissionData | null;
   loading: boolean;
@@ -33,7 +31,7 @@ export interface MissionState {
 }
 
 export interface MissionsState {
-  data: MissionsData | null;
+  data: MissionData[] | null;
   loading: boolean;
   error: string;
 }
@@ -45,7 +43,7 @@ interface GetMissionAction {
 
 interface GetMissionsAction {
   type: typeof GET_ALL_MISSION;
-  payload: MissionsData;
+  payload: MissionData[];
 }
 
 interface UpdateMissionAction {

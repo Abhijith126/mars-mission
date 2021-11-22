@@ -1,20 +1,9 @@
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '..';
 import { fetchAllMissions } from '../../services/mission';
-import {
-  MissionsAction,
-  MissionsData,
-  MissionError,
-  GET_ALL_MISSION,
-  SET_ERROR,
-} from '../../util/types';
+import { MissionsAction, MissionError, GET_ALL_MISSION, SET_ERROR, MissionData } from '../../util/types';
 
-export const getAllMissions = (): ThunkAction<
-  void,
-  RootState,
-  null,
-  MissionsAction
-> => {
+export const getAllMissions = (): ThunkAction<void, RootState, null, MissionsAction> => {
   return async (dispatch) => {
     try {
       const res = await fetchAllMissions();
@@ -24,7 +13,7 @@ export const getAllMissions = (): ThunkAction<
         throw new Error(resData.message);
       }
 
-      const resData: MissionsData = await res.json();
+      const resData: MissionData[] = await res.json();
       dispatch({
         type: GET_ALL_MISSION,
         payload: resData,

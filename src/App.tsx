@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store';
 import { setAlert } from './store/actions/alertActions';
 import { setError } from './store/actions/missionActions';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
-import MissionList from './components/Missions/index';
 import MissionFormPage from './pages/MissionFormPage';
+import MissionsPage from './pages/MissionsPage';
 import Alert from './components/Alert';
 import './App.scss';
 import { t } from './util';
@@ -24,7 +23,7 @@ const App: FC = () => {
         <Header title={t('title')} />
         <div className="App__Body">
           <Routes>            
-            <Route path="/" element={<MissionList />} />
+            <Route path="/" element={<MissionsPage />} />
               <Route path="mission" element={<MissionFormPage />} />
               <Route path="mission/:missionId" element={<MissionFormPage />} />
           </Routes>
