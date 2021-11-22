@@ -1,27 +1,31 @@
 .Input {
-  padding: 5px;
-  border-radius: 5px;
-  border: solid 1px lightgray;
-  &_Text {
-    min-height: 20px;
-  }
-  &_Select {
-    background-color: white;
-    width: 189px;
-    min-height: 32px;
-  }
-  &--label {
+  display: flex;
+  flex-direction: column;
+  margin-right: 12px;
+
+  &_Field {
+    margin-top: 8px;
     font-size: 14px;
-    display: block;
-    margin: 0px 0px 5px 2px;
+    border: 1px solid #eaeaea;
+    height: 32px;
+    border-radius: 2px;
+    padding: 4px 8px;
+    min-width: 200px;
+
+    &__Error {
+      border: solid 1px #ff0000;
+    }
   }
-  &--error {
-    padding-left: 5px;
-    font-size: 11px;
+
+  &_Select {
+    min-height: 42px;
+  }
+
+  &_Error {
+    padding-left: 4px;
+    font-size: 12px;
     color: #ff0000;
-  }
-  &--error-field {
-    border: solid 1px #ff0000;
+    height: 14px;
   }
 }
 

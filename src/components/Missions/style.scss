@@ -8,7 +8,6 @@
     padding-bottom: 20px;
   }
 
-
   &_Table {
     border-collapse: separate;
     border: 1px solid #eaeaea;
@@ -18,7 +17,7 @@
     border-spacing: 0;
 
     & thead {
-      background-color:  #eaeaea;
+      background-color: #eaeaea;
 
       & th {
         text-align: left;
@@ -27,7 +26,6 @@
     }
 
     & tbody {
-
       & td {
         vertical-align: middle;
         padding: 12px 20px;
@@ -38,6 +36,7 @@
     &__Actions {
       display: flex;
       flex-direction: row;
+      justify-content: end;
     }
 
     &__depart {
@@ -62,16 +61,20 @@
 }
 
 .Mission {
+  padding: 20px;
+
   &_Title {
     font-size: large;
     padding-bottom: 1%;
     border-bottom: solid 1px lightgray;
   }
+
   &_FirstRow {
     display: flex;
     flex-direction: row;
     margin-bottom: 1%;
   }
+
   &_Members {
     display: flex;
     flex-direction: row;
@@ -85,12 +88,14 @@
       border-radius: 5px;
     }
   }
+
   &_Actions {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
   }
+
   &--fields {
     margin-bottom: 14px;
     padding-right: 2vmin;

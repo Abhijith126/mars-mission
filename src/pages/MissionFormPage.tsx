@@ -48,7 +48,7 @@ const Mission: FC = () => {
   return (
     <Formik {...formProps}>
       {(props) => (
-        <Form>
+        <Form className="Mission">
           <h4 className="Mission_Title">{isEdit ? t('missions.form.titles.edit') : t('missions.form.titles.new')}</h4>
           <div className="Mission_FirstRow">
             <Field

@@ -1,4 +1,4 @@
-import { FC, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Field, FieldArray, FormikProps } from 'formik';
 import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../../constants';
 import { t } from '../../util';
@@ -7,12 +7,13 @@ import Input from '../Form/Input';
 import Select from '../Form/Select';
 import { Member, MissionFormValueTypes } from '../../util/types';
 import { defaultMembers, getPassengers } from './helpers';
+import './style.scss'
 
 interface MemberFormProps {
   formProps: FormikProps<MissionFormValueTypes>;
 }
 
-const MemberForm: FC<MemberFormProps> = (props: MemberFormProps) => {
+const MemberForm = (props: MemberFormProps) => {
   const { values, setFieldValue, setValues } = props.formProps;
   const { members } = values;
 

@@ -19,19 +19,18 @@ const Input = (props: InputProps) => {
   const error = meta.touched && meta.error ? meta.error : null;
 
   return (
-    <div className="Mission--fields">
-      <label className="Input--label" htmlFor={name}>
+    <div className="Input">
+      <label className="Input_Label" htmlFor={name}>
         {label} {required ? ' *' : ''}
       </label>
       <input
         {...props}
-        className={`${className || ''} Input Input_Text ${error ? ' Input--error-field' : ''} `}
+        className={`${className || ''} Input_Field ${error && ' Input_Field__Error'}`}
         name={name}
         value={field.value || ''}
         disabled={disabled}
       />
-      <br />
-      <span className="Input--error">{error}</span>
+      <span className="Input_Error">{error}</span>
     </div>
   );
 };
