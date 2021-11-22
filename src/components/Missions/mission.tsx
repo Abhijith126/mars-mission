@@ -73,15 +73,15 @@ const Mission: FC = () => {
     const jobs = getAssignedJobs(members);
     const uniqJobs = Array.from(new Set(jobs));
     if (pilots.length === 0) {
-      dispatch(setAlert(t('missions.errors.min1Pilot')));
+      dispatch(setAlert(t('missions.form.errors.min1Pilot')));
       return false;
     }
     if (getPassengers(members).length === 0) {
-      dispatch(setAlert(t('missions.errors.min1Passenger')));
+      dispatch(setAlert(t('missions.form.errors.min1Passenger')));
       return false;
     }
     if (jobs.length !== uniqJobs.length) {
-      dispatch(setAlert(t('missions.errors.uniqueJobs')));
+      dispatch(setAlert(t('missions.form.errors.uniqueJobs')));
       return false;
     }
     return true;
