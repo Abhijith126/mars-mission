@@ -1,24 +1,14 @@
-import PropTypes from 'prop-types';
-import { FC } from 'react';
-
+import './styles.scss';
 interface Props {
   title?: string;
 }
 
-const Header: FC<Props> = ({ title }) => {
+const Header = ({ title }: Props) => {
   return (
-    <header className="App__Header">
+    <header className="Header">
       <h2>{title}</h2>
     </header>
   );
-};
-
-Header.defaultProps = {
-  title: 'Journey to Mars',
-};
-
-Header.propTypes = {
-  title: PropTypes.string,
 };
 
 export default Header;

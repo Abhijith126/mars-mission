@@ -8,7 +8,6 @@ import Header from './components/Header';
 import MissionFormPage from './pages/MissionFormPage';
 import MissionsPage from './pages/MissionsPage';
 import Alert from './components/Alert';
-import './App.scss';
 import { t } from './util';
 
 const App: FC = () => {
@@ -20,7 +19,7 @@ const App: FC = () => {
     <Router>
       <div className="App">
         <Header title={t('title')} />
-        <div className="App__Body">
+        <div>
           <Routes>            
             <Route path="/" element={<MissionsPage />} />
               <Route path="mission" element={<MissionFormPage />} />

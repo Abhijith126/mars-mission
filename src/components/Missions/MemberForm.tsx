@@ -3,7 +3,6 @@ import { Field, FieldArray, FormikProps } from 'formik';
 import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../../constants';
 import { t } from '../../util';
 import Button from '../Form/Button';
-import IconButton from '../Form/IconButton';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
 import { Member, MissionFormValueTypes } from '../../util/types';
@@ -96,7 +95,7 @@ const MemberForm: FC<MemberFormProps> = (props: MemberFormProps) => {
                     />
                   </>
                 )}
-                {renderDeleteAction(member.type) && <IconButton type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
+                {renderDeleteAction(member.type) && <Button type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
               </div>
             ))}
           </>

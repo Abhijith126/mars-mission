@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-interface InputProps {
-  name: string;
-  appearance?: 'default' | 'primary' | 'danger' | 'success';
+export interface ButtonProps {
+  name?: string;
+  appearance?: 'default' | 'primary' | 'danger';
   className?: string;
   disabled?: boolean;
   type?: 'submit' | 'button' | 'reset';
@@ -13,18 +12,18 @@ interface InputProps {
   icon?: string;
 }
 
-const Button = (props: InputProps) => {
+const Button = (props: ButtonProps) => {
   const { name, type, className, appearance, onClick, redirect, icon } = props;
 
   const prepareClassName = () => {
     let classname = (className || '') + ' Button';
+    if (icon) classname += ' Button_Icon';
+
     switch (appearance) {
       case 'primary':
         return classname + ' Button_Primary';
       case 'danger':
         return classname + ' Button_Danger';
-      case 'success':
-        return classname + ' Button_Success';
       default:
         return classname;
     }
@@ -42,38 +41,18 @@ const Button = (props: InputProps) => {
     }
   };
   return (
-    <div className="Mission--fields">
+    <div>
       {redirect ? (
-        <Link
-          to={redirect}
-          {...props}
-          onClick={onClick}
-          className={prepareClassName() + ' Button_Link'}
-        >
-          {name} &nbsp; {icon && <i className={getIconName()}></i>}
+        <Link to={redirect} {...props} onClick={onClick} className={prepareClassName() + ' Button_Link'}>
+          {icon ? <i className={getIconName()}></i> : name}
         </Link>
       ) : (
-        <button
-          {...props}
-          onClick={onClick}
-          type={type}
-          className={prepareClassName()}
-        >
-          {name} &nbsp; {icon && <i className={getIconName()}></i>}
+        <button {...props} onClick={onClick} type={type} className={prepareClassName()}>
+          {icon ? <i className={getIconName()}></i> : name}
         </button>
       )}
     </div>
   );
-};
-
-Button.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
-};
-
-Button.defaultProps = {
-  name: 'text',
-  type: 'button',
 };
 
 export default Button;

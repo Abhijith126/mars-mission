@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useField } from 'formik';
 import './styles.scss';
 
@@ -18,6 +17,7 @@ const Input = (props: InputProps) => {
   const { name, label, disabled, required, className } = props;
   const [field, meta] = useField(props);
   const error = meta.touched && meta.error ? meta.error : null;
+
   return (
     <div className="Mission--fields">
       <label className="Input--label" htmlFor={name}>
@@ -25,9 +25,7 @@ const Input = (props: InputProps) => {
       </label>
       <input
         {...props}
-        className={`${className || ''} Input Input_Text ${
-          error ? ' Input--error-field' : ''
-        } `}
+        className={`${className || ''} Input Input_Text ${error ? ' Input--error-field' : ''} `}
         name={name}
         value={field.value || ''}
         disabled={disabled}
@@ -36,14 +34,6 @@ const Input = (props: InputProps) => {
       <span className="Input--error">{error}</span>
     </div>
   );
-};
-
-Input.propTypes = {
-  name: PropTypes.string,
-};
-
-Input.defaultProps = {
-  name: 'text',
 };
 
 export default Input;

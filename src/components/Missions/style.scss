@@ -1,19 +1,63 @@
 .Missions {
+  padding: 20px;
+
   &_Header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1vmin 0;
+    padding-bottom: 20px;
   }
-  &--departure {
-    font-style: italic;
-    &_departed {
-      color: lightcoral;
+
+
+  &_Table {
+    border-collapse: separate;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    font-size: 14px;
+    width: 100%;
+    border-spacing: 0;
+
+    & thead {
+      background-color:  #eaeaea;
+
+      & th {
+        text-align: left;
+        padding: 8px 20px;
+      }
     }
-  }
-  &_Actions {
-    display: flex;
-    flex-direction: row;
+
+    & tbody {
+
+      & td {
+        vertical-align: middle;
+        padding: 12px 20px;
+        border-bottom: 1px solid #eaeaea;
+      }
+    }
+
+    &__Actions {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__depart {
+      color: #7491f0;
+    }
+
+    &__departed {
+      color: #f07474;
+    }
+
+    &__Empty {
+      padding: 40px 0 !important;
+      text-align: center;
+    }
+
+    &__Search {
+      padding: 12px;
+      border-radius: 2px;
+      border: solid 1px #8a8a8a;
+    }
   }
 }
 
@@ -50,37 +94,5 @@
   &--fields {
     margin-bottom: 14px;
     padding-right: 2vmin;
-  }
-}
-
-.MissionList {
-  border-collapse: separate;
-  border: solid lightgray 1px;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 100%;
-
-  &--no-records{
-    text-align: center;
-  }
-  thead {
-    border-radius: 6px;
-    background-color: #f2f2f2;
-  }
-
-  input {
-    padding: 6px;
-    border-radius: 6px;
-    border: solid 1px lightgray;
-  }
-
-  th,
-  td {
-    vertical-align: middle;
-    border-bottom: solid lightgray 1px;
-    padding: 4px;
-    p {
-      margin: 4px;
-    }
   }
 }

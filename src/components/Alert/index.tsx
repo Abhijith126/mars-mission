@@ -1,12 +1,10 @@
-import { FC } from 'react';
 import './styles.scss';
-
 interface AlertProps {
   message: string;
   onClose: () => void;
 }
 
-const Alert: FC<AlertProps> = ({ message, onClose }) => {
+const Alert = ({ message, onClose }: AlertProps) => {
   return (
     <div className="Alert">
       <div className="alert">
