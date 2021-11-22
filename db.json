@@ -274,6 +274,28 @@
       "destination": "2",
       "departure": "2021-11-19",
       "id": 5
+    },
+    {
+      "name": "dd",
+      "members": [
+        {
+          "type": "Pilot",
+          "experience": 33
+        },
+        {
+          "type": "Passenger",
+          "age": 33,
+          "wealth": "33"
+        },
+        {
+          "type": "Engineer",
+          "experience": 44,
+          "job": "Navigation"
+        }
+      ],
+      "destination": "dd",
+      "departure": "2021-11-22",
+      "id": 6
     }
   ]
 }

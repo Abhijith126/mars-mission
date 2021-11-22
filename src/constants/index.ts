@@ -9,5 +9,6 @@ export const SolarPanels = { key: 'SOLAR_PANELS', value: 'Solar panels' };
 export const Maintenance = { key: 'MAINTENANCE', value: 'Maintenance' };
 export const Mechanics = { key: 'MECHANICS', value: 'Mechanics' };
 
-export const MemberType = [Pilot, Engineer, Passenger];
+export const AllMemberTypes = [Pilot, Engineer, Passenger];
+export const FilteredMemberTypes = [Engineer, Passenger];
 export const Jobs = [Navigation, SolarPanels, Maintenance, Mechanics];

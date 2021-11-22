@@ -1,26 +1,31 @@
 import * as Yup from 'yup';
-import { Engineer, Passenger, Pilot } from '../../constants';
+import moment from 'moment';
+import { Engineer, Navigation, Passenger, Pilot } from '../../constants';
 import { t } from '../../util';
 
-const initialValues = {
-  name: '',
-  members: [],
-  destination: '',
-  departure: '',
-};
-
-const defaultMembers = {
+const defaultMembers: { [key: string]: any } = {
   passenger: {
     type: Passenger.value,
-    age: 1,
+    age: 0,
     wealth: '',
   },
   pilot: { type: Pilot.value, experience: 0 },
   engineer: {
     type: Engineer.value,
     experience: 0,
-    job: '',
+    job: Navigation.value,
   },
+};
+
+const initialValues = {
+  name: '',
+  members: [
+    defaultMembers.pilot,
+    defaultMembers.passenger,
+    defaultMembers.engineer,
+  ],
+  destination: '',
+  departure: moment(new Date()).format('YYYY-MM-DD'),
 };
 
 const validationSchema = Yup.object({

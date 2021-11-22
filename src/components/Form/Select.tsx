@@ -28,7 +28,6 @@ const Select = (props: SelectProps) => {
         className={`${className || ''} Input Input_Select ${
           error ? ' Input--error-field' : ''
         } `}
-        name={name}
         value={field.value || ''}
         disabled={disabled}
       >

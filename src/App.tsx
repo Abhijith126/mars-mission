@@ -30,14 +30,13 @@ const App: FC = () => {
             <Route path="/" element={<MissionList />} />
           </Routes>
         </div>
-        <Footer />
-
         {alertMsg && (
           <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />
         )}
         {error && (
           <Alert message={error} onClose={() => dispatch(setError())} />
         )}
+        <Footer />
       </div>
     </Router>
   );

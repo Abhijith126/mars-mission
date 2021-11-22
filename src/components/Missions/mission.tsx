@@ -13,7 +13,8 @@ import { RootState } from '../../store';
 import {
   Engineer,
   Jobs,
-  MemberType,
+  AllMemberTypes,
+  FilteredMemberTypes,
   NewMission,
   Passenger,
   Pilot,
@@ -61,6 +62,8 @@ const Mission: FC = () => {
     members.filter((e: Member) => e.type === Pilot.value);
   const getEngineers = (members: Member[]) =>
     members.filter((e: Member) => e.type === Engineer.value);
+  const getPassengers = (members: Member[]) =>
+    members.filter((e: Member) => e.type === Passenger.value);
 
   const validateDetails = (mission: MissionData) => {
     const members = mission.members;
@@ -117,6 +120,30 @@ const Mission: FC = () => {
         navigate('/mission');
       }
     }
+  };
+
+  const renderDeleteAction = (currentMemberType: string, members: Member[]) => {
+    if (
+      currentMemberType === Passenger.value &&
+      getPassengers(members).length === 1
+    ) {
+      return false;
+    }
+    if (currentMemberType === Pilot.value) {
+      return false;
+    }
+    return true;
+  };
+
+  const handleMemberChange = (
+    index: number,
+    currentMemberType: string,
+    props: any,
+  ) => {
+    const { values, setFieldValue } = props;
+    let members = values.members;
+    members[index] = defaultMembers[currentMemberType.toLowerCase()];
+    setFieldValue('members', members);
   };
 
   const formProps = {
@@ -176,7 +203,15 @@ const Mission: FC = () => {
                           as={Select}
                           label={t('missions.form.labels.type')}
                           value={member.type}
-                          options={MemberType}
+                          disabled={member.type === Pilot.value}
+                          options={
+                            member.type === Pilot.value
+                              ? AllMemberTypes
+                              : FilteredMemberTypes
+                          }
+                          onChange={(e: any) =>
+                            handleMemberChange(index, e.target.value, props)
+                          }
                           required
                         />
                         {(member.type === Pilot.value ||
@@ -223,12 +258,17 @@ const Mission: FC = () => {
                             />
                           </>
                         )}
-                        <IconButton
-                          type="button"
-                          icon="delete"
-                          onClick={() => deleteMember(index, props)}
-                          appearance="danger"
-                        />
+                        {renderDeleteAction(
+                          member.type,
+                          props.values.members,
+                        ) && (
+                          <IconButton
+                            type="button"
+                            icon="delete"
+                            onClick={() => deleteMember(index, props)}
+                            appearance="danger"
+                          />
+                        )}
                       </div>
                     ),
                   )}
