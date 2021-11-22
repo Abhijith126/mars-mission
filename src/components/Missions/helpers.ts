@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Engineer, Navigation, Passenger, Pilot } from '../../constants';
+import { Engineer, Navigation, Passenger, Pilot } from '../../util/constants';
 import { t } from '../../util';
 import { Member } from '../../util/types';
 

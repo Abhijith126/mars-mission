@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { validateMission, validationSchema } from '../components/Missions/validations';
@@ -9,10 +9,11 @@ import { MissionData } from '../util/types';
 import Input from '../components/Form/Input';
 import Button from '../components/Form/Button';
 import MemberForm from '../components/Missions/MemberForm';
-import { t } from '../util';
 import { initialValues } from '../components/Missions/helpers';
+import { t } from '../util';
+import '../components/Missions/styles.scss';
 
-const Mission: FC = () => {
+const MissionFormPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
@@ -48,9 +49,9 @@ const Mission: FC = () => {
   return (
     <Formik {...formProps}>
       {(props) => (
-        <Form className="Mission">
-          <h4 className="Mission_Title">{isEdit ? t('missions.form.titles.edit') : t('missions.form.titles.new')}</h4>
-          <div className="Mission_FirstRow">
+        <Form className="MissionsForm">
+          <h3>{isEdit ? t('missions.form.titles.edit') : t('missions.form.titles.new')}</h3>
+          <div className="MissionsForm_Inputs">
             <Field
               name="name"
               as={Input}
@@ -78,7 +79,7 @@ const Mission: FC = () => {
             />
           </div>
           <MemberForm formProps={props} />
-          <div className="Mission_Actions">
+          <div className="MissionsForm_Actions">
             <Button name={t('missions.buttons.cancel')} type="button" redirect="/" />
             <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary" />
           </div>
@@ -88,4 +89,4 @@ const Mission: FC = () => {
   );
 };
 
-export default Mission;
+export default MissionFormPage;

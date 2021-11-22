@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store';
@@ -10,7 +9,7 @@ import MissionsPage from './pages/MissionsPage';
 import Alert from './components/Alert';
 import { t } from './util';
 
-const App: FC = () => {
+const App = () => {
   const dispatch = useDispatch();
   const error = useSelector((state: RootState) => state.mission.error);
   const alertMsg = useSelector((state: RootState) => state.alert.message);

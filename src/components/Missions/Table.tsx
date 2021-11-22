@@ -7,7 +7,7 @@ import { t } from '../../util';
 import { RootState } from '../../store';
 import { daysDiff, getDepartureDays } from './helpers';
 import Button from '../Form/Button';
-import './style.scss';
+import './styles.scss';
 
 const MissionTable = () => {
   const dispatch = useDispatch();

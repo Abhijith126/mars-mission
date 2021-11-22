@@ -1,13 +1,13 @@
 import { ChangeEvent } from 'react';
 import { Field, FieldArray, FormikProps } from 'formik';
-import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../../constants';
+import { AllMemberTypes, Engineer, FilteredMemberTypes, Jobs, Passenger, Pilot } from '../../util/constants';
 import { t } from '../../util';
 import Button from '../Form/Button';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
 import { Member, MissionFormValueTypes } from '../../util/types';
 import { defaultMembers, getPassengers } from './helpers';
-import './style.scss'
+import './styles.scss';
 
 interface MemberFormProps {
   formProps: FormikProps<MissionFormValueTypes>;
@@ -44,14 +44,15 @@ const MemberForm = (props: MemberFormProps) => {
   };
 
   return (
-    <div className="Mission_Members--card">
-      <p className="Mission_Title">{t('missions.members')}</p>
+    <div className="MissionsForm_Members">
+      <h4>{t('missions.members')}</h4>
+      <br />
       <FieldArray
         name="members"
         render={() => (
           <>
             {members.map((member: Member, index: number) => (
-              <div key={index} className="Mission_Members">
+              <div key={index} className="MissionsForm_Members__Item">
                 <Field
                   name={`members.${index}.type`}
                   as={Select}
@@ -96,13 +97,13 @@ const MemberForm = (props: MemberFormProps) => {
                     />
                   </>
                 )}
-                {renderDeleteAction(member.type) && <Button type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
+                {renderDeleteAction(member.type) && <Button className="MissionsForm_Members__Item-Delete" type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
               </div>
             ))}
           </>
         )}
       />
-      <Button name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} />
+      <Button name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} appearance="primary"/>
     </div>
   );
 };

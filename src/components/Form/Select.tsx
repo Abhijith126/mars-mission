@@ -1,10 +1,15 @@
 import { useField } from 'formik';
 import './styles.scss';
 
+interface Option {
+  key: string;
+  value: string;
+}
+
 interface SelectProps {
   name: string;
   label: string;
-  options: any[];
+  options: Option[];
   className?: string;
   defaultValue?: string | number;
   required?: boolean;
@@ -23,8 +28,13 @@ const Select = (props: SelectProps) => {
       <label className="Input_Label" htmlFor={name}>
         {label} {required ? ' *' : ''}
       </label>
-      <select {...props} className={`${className || ''} Input_Field Input_Select ${error ? ' Input_Field__Error' : ''} `} value={field.value || ''} disabled={disabled}>
-        {options.map((option: any, i: number) => (
+      <select
+        {...props}
+        className={`${className || ''} Input_Field Input_Select ${error ? ' Input_Field__Error' : ''} `}
+        value={field.value || ''}
+        disabled={disabled}
+      >
+        {options.map((option: Option, i: number) => (
           <option key={i} value={option.value}>
             {option.value}
           </option>

@@ -2,7 +2,7 @@ import MissionTable from '../components/Missions/Table';
 import Button from '../components/Form/Button';
 import { t } from '../util';
 
-const MissionList = () => {
+const MissionsPage = () => {
   return (
     <div className="Missions">
       <div className="Missions_Header">
@@ -14,4 +14,4 @@ const MissionList = () => {
   );
 };
 
-export default MissionList;
+export default MissionsPage;

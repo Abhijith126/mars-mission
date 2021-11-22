@@ -1,3 +1,11 @@
+@mixin container {
+  border: 1px solid #eaeaea;
+  border-radius: 2px;
+  font-size: 14px;
+  width: 100%;
+  border-spacing: 0;
+}
+
 .Missions {
   padding: 20px;
 
@@ -9,12 +17,7 @@
   }
 
   &_Table {
-    border-collapse: separate;
-    border: 1px solid #eaeaea;
-    border-radius: 2px;
-    font-size: 14px;
-    width: 100%;
-    border-spacing: 0;
+    @include container;
 
     & thead {
       background-color: #eaeaea;
@@ -36,7 +39,7 @@
     &__Actions {
       display: flex;
       flex-direction: row;
-      justify-content: end;
+      justify-content: flex-end;
     }
 
     &__depart {
@@ -60,33 +63,13 @@
   }
 }
 
-.Mission {
+.MissionsForm {
   padding: 20px;
 
-  &_Title {
-    font-size: large;
-    padding-bottom: 1%;
-    border-bottom: solid 1px lightgray;
-  }
-
-  &_FirstRow {
+  &_Inputs {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1%;
-  }
-
-  &_Members {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 1%;
-    border-bottom: solid 1px lightgray;
-    &--card {
-      padding: 0% 2%;
-      background-color: #faf4f4;
-      border: 1px solid lightgrey;
-      border-radius: 5px;
-    }
+    padding: 20px 0;
   }
 
   &_Actions {
@@ -94,10 +77,25 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 20px;
   }
 
-  &--fields {
-    margin-bottom: 14px;
-    padding-right: 2vmin;
+  &_Members {
+    @include container;
+    width: auto;
+    padding: 0 20px;
+    background-color: #fafafa;
+
+    &__Item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: solid 1px #eaeaea;
+
+      &-Delete {
+        margin-top: 16px;
+      }
+    }
   }
 }

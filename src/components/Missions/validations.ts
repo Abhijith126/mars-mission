@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import * as Yup from 'yup';
-import { Engineer, Passenger, Pilot } from '../../constants';
+import { Engineer, Passenger, Pilot } from '../../util/constants';
 import { setAlert } from '../../store/actions/alertActions';
 import { t } from '../../util';
 import { MissionData, AlertAction } from '../../util/types';
