@@ -53,6 +53,11 @@ const missions = {
       age1: 'Age cant be less an year',
       age100: 'Max age is 100',
     },
+    errors: {
+      min1Pilot: 'A mission must/can have only 1 pilot',
+      min1Passenger: 'A mission must have atlest 1 passenger',
+      uniqueJobs: 'Multiple Engineers cannot have same job',
+    },
   },
   buttons: {
     cancel: 'Cancel',

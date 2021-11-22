@@ -64,59 +64,37 @@ const Mission: FC = () => {
     members.filter((e: Member) => e.type === Engineer.value);
   const getPassengers = (members: Member[]) =>
     members.filter((e: Member) => e.type === Passenger.value);
+  const getAssignedJobs = (members: Member[]) =>
+    getEngineers(members).map((engineer: Member) => engineer.job);
 
   const validateDetails = (mission: MissionData) => {
     const members = mission.members;
     const pilots = getPilots(members);
-
-    if (members.length <= 0) {
-      dispatch(setAlert('Please add atleast 1 member'));
+    const jobs = getAssignedJobs(members);
+    const uniqJobs = Array.from(new Set(jobs));
+    if (pilots.length === 0) {
+      dispatch(setAlert(t('missions.errors.min1Pilot')));
       return false;
     }
-    if (pilots.length !== 1) {
-      dispatch(setAlert('A mission must/can have only 1 pilot'));
+    if (getPassengers(members).length === 0) {
+      dispatch(setAlert(t('missions.errors.min1Passenger')));
       return false;
     }
-    if (pilots.filter((e: any) => e.experience < 10).length < 0) {
-      dispatch(setAlert('A pilot should have minimum 10 years of experience'));
+    if (jobs.length !== uniqJobs.length) {
+      dispatch(setAlert(t('missions.errors.uniqueJobs')));
       return false;
     }
     return true;
   };
 
-  const cleanUpData = (mission: MissionData) => {
-    const members = mission.members.map((member: Member) => {
-      switch (member.type) {
-        case Pilot.value:
-          delete member.job;
-          delete member.wealth;
-          delete member.age;
-          return member;
-        case Passenger.value:
-          delete member.job;
-          delete member.experience;
-          return member;
-        case Engineer.value:
-          delete member.wealth;
-          delete member.age;
-          return member;
-        default:
-          return member;
-      }
-    });
-    return { ...mission, members };
-  };
-
   const onSubmit = (values: any) => {
     const valid = validateDetails(values);
-
     if (valid) {
-      const cleanData = cleanUpData(values);
       if (isEdit) {
-        dispatch(updateMissionById(missionId, cleanData));
+        dispatch(updateMissionById(missionId, values));
         navigate('/mission');
       } else {
-        dispatch(createNewMission(cleanData));
+        dispatch(createNewMission(values));
         navigate('/mission');
       }
     }
