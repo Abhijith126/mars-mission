@@ -11,6 +11,7 @@ import MissionList from './components/Missions/index';
 import Mission from './components/Missions/mission';
 import Alert from './components/Alert';
 import './App.scss';
+import { t } from './util';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const App: FC = () => {
   return (
     <Router>
       <div className="App">
-        <Header title="Journey to Mars" />
+        <Header title={t('title')} />
         <div className="App__Body">
           <Routes>
             <Route path="mission" element={<MissionList />} />

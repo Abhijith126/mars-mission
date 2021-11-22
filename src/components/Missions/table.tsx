@@ -7,6 +7,7 @@ import {
 } from '../../store/actions/missionActions';
 import { getAllMissions } from '../../store/actions/missionsActions';
 import { MissionData, MissionsData } from '../../store/types';
+import { t } from '../../util';
 import IconButton from '../Form/IconButton';
 import './style.scss';
 
@@ -53,9 +54,9 @@ const MissionTable: FC<Props> = ({ missions }) => {
 
     return daysDif > 0
       ? monthsDiff > 3
-        ? ` in ${monthsDiff} months`
-        : ` in ${daysDif} days`
-      : 'Departed';
+        ? ` in ${monthsDiff} ${t('missions.table.text.months')}`
+        : ` in ${daysDif} ${t('missions.table.text.days')}`
+      : t('missions.table.text.departed');
   };
 
   const getDepartedClass = (departureDate: string) => {
@@ -71,18 +72,18 @@ const MissionTable: FC<Props> = ({ missions }) => {
             <input
               name="search"
               onChange={(e) => filterMissions(e.target.value)}
-              placeholder="Search by name..."
+              placeholder={t('missions.table.text.search')}
             />
           </th>
-          <th>Members</th>
-          <th>Destination</th>
-          <th>Departure</th>
+          <th>{t('missions.table.members')}</th>
+          <th>{t('missions.table.destination')}</th>
+          <th>{t('missions.table.departure')}</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {missionsState &&
-          missionsState?.map((mission: any) => (
+        {missionsState?.length ? (
+          missionsState.map((mission: any) => (
             <tr key={mission.id}>
               <td width="20%">{mission.name}</td>
               <td width="20%">{mission.members.length}</td>
@@ -117,7 +118,12 @@ const MissionTable: FC<Props> = ({ missions }) => {
                 </div>
               </td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr>
+            <td colSpan={5} className="MissionList--no-records">No records to display</td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

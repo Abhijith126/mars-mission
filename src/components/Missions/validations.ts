@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import { Engineer, Passenger, Pilot } from '../../constants';
+import { t } from '../../util';
 
 const initialValues = {
   name: '',
@@ -7,56 +9,68 @@ const initialValues = {
   departure: '',
 };
 
-const defaultMember = {
-  type: 'Passenger',
-  age: 0,
-  wealth: '',
-  experience: 0,
-  job: '',
+const defaultMembers = {
+  passenger: {
+    type: Passenger.value,
+    age: 1,
+    wealth: '',
+  },
+  pilot: { type: Pilot.value, experience: 0 },
+  engineer: {
+    type: Engineer.value,
+    experience: 0,
+    job: '',
+  },
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Mission name is required'),
-  destination: Yup.string().required('Mission destination is required'),
-  departure: Yup.date().required('Mission departure is required'),
+  name: Yup.string().required(t('missions.form.validations.required.name')),
+  destination: Yup.string().required(
+    t('missions.form.validations.required.destination'),
+  ),
+  departure: Yup.date().required(
+    t('missions.form.validations.required.departure'),
+  ),
   members: Yup.array().of(
     Yup.object().shape({
-      type: Yup.string().required('Member type required'),
+      type: Yup.string().required(t('missions.form.validations.required.type')),
       experience: Yup.number()
         .when('type', {
-          is: 'Pilot',
+          is: Pilot.value,
           then: Yup.number()
-            .required('Experience is required')
-            .min(10, 'Min 10 years of experience'),
+            .required(t('missions.form.validations.required.exp'))
+            .min(10, t('missions.form.validations.exp10')),
           otherwise: Yup.number().min(0),
         })
         .when('type', {
-          is: 'Engineer',
+          is: Engineer.value,
           then: Yup.number()
-            .required('Experience is required')
-            .min(1, 'Min 1 years of experience')
-            .max(60, 'Max experience is 60'),
+            .required(t('missions.form.validations.required.exp'))
+            .min(1, t('missions.form.validations.exp1'))
+            .max(60, t('missions.form.validations.exp60')),
           otherwise: Yup.number(),
         }),
       job: Yup.string().when('type', {
-        is: 'Engineer',
-        then: Yup.string().required('Job is required'),
+        is: Engineer.value,
+        then: Yup.string().required(
+          t('missions.form.validations.required.job'),
+        ),
         otherwise: Yup.string(),
       }),
       age: Yup.number().when('type', {
-        is: 'Passenger',
+        is: Passenger.value,
         then: Yup.number()
-          .min(1, 'Age cant be less an year')
-          .max(100, 'Max age is 100'),
+          .min(1, t('missions.form.validations.age1'))
+          .max(100, t('missions.form.validations.age100')),
         otherwise: Yup.number(),
       }),
       wealth: Yup.string().when('type', {
-        is: 'Passenger',
-        then: Yup.string().required('Wealth is required'),
+        is: Passenger.value,
+        then: Yup.string(),
         otherwise: Yup.string(),
       }),
     }),
   ),
 });
 
-export { initialValues, validationSchema, defaultMember };
+export { initialValues, validationSchema, defaultMembers };

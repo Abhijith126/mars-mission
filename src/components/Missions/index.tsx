@@ -8,6 +8,7 @@ import './style.scss';
 import { setMissionData } from '../../store/actions/missionActions';
 import { initialValues } from './validations';
 import Button from '../Form/Button';
+import { t } from '../../util';
 
 const MissionList = () => {
   const dispatch = useDispatch();
@@ -22,12 +23,13 @@ const MissionList = () => {
   return (
     <div>
       <div className="Missions_Header">
-        <p>Missions</p>
+        <h3>{t('missions.title')}</h3>
         <Button
-          name="New Mission"
+          name={t('missions.buttons.new')}
           onClick={clearMission}
           redirect="/mission/new"
-          appearance="success"
+          appearance="primary"
+          icon="add"
         />
       </div>
       {missions && <MissionTable missions={missions} />}

@@ -48,6 +48,7 @@
     justify-content: flex-end;
   }
   &--fields {
+    margin-bottom: 14px;
     padding-right: 2vmin;
   }
 }
@@ -59,6 +60,9 @@
   font-size: 14px;
   width: 100%;
 
+  &--no-records{
+    text-align: center;
+  }
   thead {
     border-radius: 6px;
     background-color: #f2f2f2;
@@ -75,7 +79,6 @@
     vertical-align: middle;
     border-bottom: solid lightgray 1px;
     padding: 4px;
-
     p {
       margin: 4px;
     }

@@ -25,12 +25,15 @@ const Input = (props: InputProps) => {
       </label>
       <input
         {...props}
-        className={className + ' Input Input_Text'}
+        className={`${className || ''} Input Input_Text ${
+          error ? ' Input--error-field' : ''
+        } `}
         name={name}
         value={field.value || ''}
         disabled={disabled}
       />
-      <p className="Input--error">{error}</p>
+      <br />
+      <span className="Input--error">{error}</span>
     </div>
   );
 };

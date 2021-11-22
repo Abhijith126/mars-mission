@@ -25,18 +25,21 @@ const Select = (props: SelectProps) => {
       </label>
       <select
         {...props}
-        className={className + ' Input Input_Select'}
+        className={`${className || ''} Input Input_Select ${
+          error ? ' Input--error-field' : ''
+        } `}
         name={name}
         value={field.value || ''}
         disabled={disabled}
       >
         {options.map((option: any, i: number) => (
-          <option key={i} value={option}>
-            {option}
+          <option key={i} value={option.value}>
+            {option.value}
           </option>
         ))}
       </select>
-      <p className="Input--error">{error}</p>
+      <br />
+      <span className="Input--error">{error}</span>
     </div>
   );
 };
