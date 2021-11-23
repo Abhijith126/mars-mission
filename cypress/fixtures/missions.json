@@ -1,0 +1,88 @@
+[
+  {
+    "name": "Expedition 2028",
+    "members": [
+      {
+        "type": "Pilot",
+        "experience": 24
+      },
+      {
+        "type": "Passenger",
+        "age": 39,
+        "wealth": "67 crore"
+      },
+      {
+        "type": "Engineer",
+        "experience": 5,
+        "job": "Navigation"
+      },
+      {
+        "type": "Engineer",
+        "experience": 9,
+        "job": "Solar panels"
+      }
+    ],
+    "destination": "Helena 54",
+    "departure": "2025-11-23",
+    "id": 1
+  },
+  {
+    "name": "Expedition Beta",
+    "members": [
+      {
+        "type": "Pilot",
+        "experience": 20
+      },
+      {
+        "type": "Passenger",
+        "age": 10,
+        "wealth": "111111"
+      },
+      {
+        "type": "Engineer",
+        "experience": 5,
+        "job": "Navigation"
+      },
+      {
+        "type": "Engineer",
+        "experience": 8,
+        "job": "Maintenance"
+      }
+    ],
+    "destination": "GA-345",
+    "departure": "2021-01-23",
+    "id": 2
+  },
+  {
+    "name": "Expedition 2040",
+    "members": [
+      {
+        "type": "Pilot",
+        "experience": 14
+      },
+      {
+        "type": "Passenger",
+        "age": 60,
+        "wealth": "78903333"
+      },
+      {
+        "type": "Engineer",
+        "experience": 2,
+        "job": "Navigation"
+      },
+      {
+        "type": "Engineer",
+        "experience": 3,
+        "job": "Solar panels"
+      },
+      {
+        "type": "Engineer",
+        "experience": 6,
+        "job": "Maintenance"
+      }
+    ],
+    "destination": "Rover Mountain",
+    "departure": "2025-11-23",
+    "id": 3
+  }
+]

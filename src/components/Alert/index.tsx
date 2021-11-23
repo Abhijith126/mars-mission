@@ -7,14 +7,14 @@ interface AlertProps {
 
 const Alert = ({ message, onClose }: AlertProps) => {
   return (
-    <div className="Alert">
+    <div className="Alert" data-test-id="alert">
       <p className="Alert_Message">
       <strong>
         <i className="fa fa-exclamation"></i>
       </strong>
       {message}
       </p>
-      <Button className="Alert_Action" icon="close" onClick={onClose} />
+      <Button data-test-id="alert-action" className="Alert_Action" icon="close" onClick={onClose} />
     </div>
   );
 };

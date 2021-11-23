@@ -16,6 +16,7 @@ const MissionTable = () => {
 
   useEffect(() => {
     dispatch(getAllMissions());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const MissionTable = () => {
   };
 
   return (
-    <table className="Missions_Table">
+    <table className="Missions_Table" data-test-id="mission-table">
       <thead>
         <tr>
           <th>
@@ -53,6 +54,7 @@ const MissionTable = () => {
               name="search"
               onChange={(e: ChangeEvent<HTMLInputElement>) => filterMissions(e.target.value)}
               placeholder={t('missions.table.text.search')}
+              data-test-id="mission-search"
             />
           </th>
           <th>{t('missions.table.members')}</th>
@@ -63,29 +65,29 @@ const MissionTable = () => {
       </thead>
       <tbody>
         {filteredMissions?.length ? (
-          filteredMissions.map((mission: MissionData) => (
-            <tr key={mission.id}>
-              <td width="20%">{mission.name}</td>
-              <td width="20%">{mission.members.length}</td>
-              <td width="20%">{mission.destination}</td>
-              <td>
+          filteredMissions.map((mission: MissionData, index: number) => (
+            <tr key={mission.id} data-test-id="mission-row">
+              <td data-test-id="mission-row-name" width="20%">{mission.name}</td>
+              <td data-test-id="mission-row-count" width="20%">{mission.members.length}</td>
+              <td data-test-id="mission-row-destination" width="20%">{mission.destination}</td>
+              <td data-test-id="mission-row-departure">
                 <div>
-                  <span>{moment(mission.departure).format('DD/MM/YYYY')}</span>
+                  <span >{moment(mission.departure).format('DD/MM/YYYY')}</span>
                   <br/>
                   <small className={getDepartedClass(mission.departure)}>{getDepartureDays(mission.departure)}</small>
                 </div>
               </td>
               <td>
                 <div className="Missions_Table__Actions">
-                  <Button type="button" icon="edit" redirect={`/mission/${mission.id}`} onClick={() => editMissionDetails(mission)} appearance="default" />
-                  <Button type="button" icon="delete" onClick={() => deleteMissionDetails(mission?.id)} appearance="danger" />
+                  <Button data-test-id="mission-edit" type="button" icon="edit" redirect={`/mission/${mission.id}`} onClick={() => editMissionDetails(mission)} appearance="default" />
+                  <Button data-test-id="mission-delete" type="button" icon="delete" onClick={() => deleteMissionDetails(mission?.id)} appearance="danger" />
                 </div>
               </td>
             </tr>
           ))
         ) : (
           <tr>
-            <td colSpan={5} className="Missions_Table__Empty">
+            <td colSpan={5} className="Missions_Table__Empty" data-test-id="mission-empty">
               {t('missions.table.noRecords')}
             </td>
           </tr>

@@ -24,7 +24,8 @@ const MissionFormPage = () => {
 
   useEffect(() => {
     isEdit && dispatch(getMissionById(missionId));
-  }, [missionId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEdit, missionId]);
 
   const onSubmit = (values: MissionData) => {
     const valid = validateMission(values, dispatch);
@@ -50,7 +51,7 @@ const MissionFormPage = () => {
     <Formik {...formProps}>
       {(props) => (
         <Form className="MissionsForm">
-          <h3>{isEdit ? t('missions.form.titles.edit') : t('missions.form.titles.new')}</h3>
+          <h3 data-test-id="missionsForm-title">{isEdit ? t('missions.form.titles.edit') : t('missions.form.titles.new')}</h3>
           <div className="MissionsForm_Inputs">
             <Field
               name="name"
@@ -59,6 +60,7 @@ const MissionFormPage = () => {
               label={t('missions.form.labels.name')}
               placeholder={t('missions.form.placeholders.name')}
               required
+              data-test-id="missionForm-name"
             />
             <Field
               name="destination"
@@ -67,6 +69,7 @@ const MissionFormPage = () => {
               label={t('missions.form.labels.destination')}
               placeholder={t('missions.form.placeholders.destination')}
               required
+              data-test-id="missionForm-destination"
             />
             <Field
               name="departure"
@@ -76,12 +79,18 @@ const MissionFormPage = () => {
               label={t('missions.form.labels.departure')}
               placeholder={t('missions.form.placeholders.departure')}
               required
+              data-test-id="missionForm-departure"
             />
           </div>
           <MemberForm formProps={props} />
           <div className="MissionsForm_Actions">
-            <Button name={t('missions.buttons.cancel')} type="button" redirect="/" />
-            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.create')} type="submit" appearance="primary" />
+            <Button data-test-id="missionForm-delete" name={t('missions.buttons.cancel')} type="button" redirect="/" />
+            <Button
+              data-test-id="missionForm-submit"
+              name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.create')}
+              type="submit"
+              appearance="primary"
+            />
           </div>
         </Form>
       )}

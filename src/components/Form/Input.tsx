@@ -30,7 +30,7 @@ const Input = (props: InputProps) => {
         value={field.value || ''}
         disabled={disabled}
       />
-      <span className="Input_Error">{error}</span>
+      <span data-test-id="input-error" className="Input_Error">{error}</span>
     </div>
   );
 };

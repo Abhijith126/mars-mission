@@ -52,7 +52,7 @@ const MemberForm = (props: MemberFormProps) => {
         render={() => (
           <>
             {members.map((member: Member, index: number) => (
-              <div key={index} className="MissionsForm_Members__Item">
+              <div key={index} className="MissionsForm_Members__Item" data-test-id={`membersForm-row-${index}`}>
                 <Field
                   name={`members.${index}.type`}
                   as={Select}
@@ -62,6 +62,7 @@ const MemberForm = (props: MemberFormProps) => {
                   options={member.type === Pilot.value ? AllMemberTypes : FilteredMemberTypes}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => handleMemberChange(index, e.target.value)}
                   required
+                  data-test-id="membersForm-type"
                 />
                 {(member.type === Pilot.value || member.type === Engineer.value) && (
                   <Field
@@ -72,10 +73,11 @@ const MemberForm = (props: MemberFormProps) => {
                     placeholder={t('missions.form.placeholders.exp')}
                     value={member.experience}
                     required
+                    data-test-id="membersForm-experience"
                   />
                 )}
                 {member.type === Engineer.value && (
-                  <Field name={`members.${index}.job`} as={Select} label={t('missions.form.labels.job')} value={member.job} options={Jobs} required />
+                  <Field data-test-id="membersForm-job" name={`members.${index}.job`} as={Select} label={t('missions.form.labels.job')} value={member.job} options={Jobs} required />
                 )}
                 {member.type === Passenger.value && (
                   <>
@@ -87,6 +89,7 @@ const MemberForm = (props: MemberFormProps) => {
                       placeholder={t('missions.form.placeholders.age')}
                       label={t('missions.form.labels.age')}
                       required
+                      data-test-id="membersForm-age"
                     />
                     <Field
                       name={`members.${index}.wealth`}
@@ -94,16 +97,17 @@ const MemberForm = (props: MemberFormProps) => {
                       value={member.wealth}
                       placeholder={t('missions.form.placeholders.wealth')}
                       label={t('missions.form.labels.wealth')}
+                      data-test-id="membersForm-wealth"
                     />
                   </>
                 )}
-                {renderDeleteAction(member.type) && <Button className="MissionsForm_Members__Item-Delete" type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
+                {renderDeleteAction(member.type) && <Button data-test-id="membersForm-remove" className="MissionsForm_Members__Item-Delete" type="button" icon="delete" onClick={() => deleteMember(index)} appearance="danger" />}
               </div>
             ))}
           </>
         )}
       />
-      <Button name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} appearance="primary"/>
+      <Button data-test-id="membersForm-add" name={t('missions.buttons.newMember')} type="button" onClick={() => addMember()} appearance="primary"/>
     </div>
   );
 };
