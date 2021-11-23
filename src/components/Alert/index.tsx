@@ -1,3 +1,4 @@
+import Button from '../Form/Button';
 import './styles.scss';
 interface AlertProps {
   message: string;
@@ -7,15 +8,13 @@ interface AlertProps {
 const Alert = ({ message, onClose }: AlertProps) => {
   return (
     <div className="Alert">
-      <div className="alert">
-        <span className="closebtn" onClick={onClose}>
-          &times;
-        </span>
-        <strong>
-          <i className="fa fa-warn"></i>
-        </strong>
-        {message}
-      </div>
+      <p className="Alert_Message">
+      <strong>
+        <i className="fa fa-exclamation"></i>
+      </strong>
+      {message}
+      </p>
+      <Button className="Alert_Action" icon="close" onClick={onClose} />
     </div>
   );
 };

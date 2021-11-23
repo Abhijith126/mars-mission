@@ -1,7 +1,6 @@
 export const GET_MISSION = 'GET_MISSION';
 export const SET_MISSION = 'SET_MISSION';
 export const SET_LOADING = 'SET_LOADING';
-export const SET_ERROR = 'SET_ERROR';
 export const SET_ALERT = 'SET_ALERT';
 export const UPDATE_MISSION = 'UPDATE_MISSION';
 export const DELETE_MISSION = 'DELETE_MISSION';
@@ -63,11 +62,6 @@ interface SetLoadingAction {
   type: typeof SET_LOADING;
 }
 
-interface SetErrorAction {
-  type: typeof SET_ERROR;
-  payload: string;
-}
-
 export type MissionAction =
   | AddMissionAction
   | GetMissionAction
@@ -75,8 +69,8 @@ export type MissionAction =
   | DeleteMissionAction
   | SetMissionAction
   | SetLoadingAction
-  | SetErrorAction
-  | GetMissionsAction;
+  | GetMissionsAction
+  | AlertAction;
 
 export interface AlertAction {
   type: typeof SET_ALERT;

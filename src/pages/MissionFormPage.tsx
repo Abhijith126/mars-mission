@@ -81,7 +81,7 @@ const MissionFormPage = () => {
           <MemberForm formProps={props} />
           <div className="MissionsForm_Actions">
             <Button name={t('missions.buttons.cancel')} type="button" redirect="/" />
-            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.new')} type="submit" appearance="primary" />
+            <Button name={isEdit ? t('missions.buttons.edit') : t('missions.buttons.create')} type="submit" appearance="primary" />
           </div>
         </Form>
       )}

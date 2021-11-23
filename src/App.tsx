@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store';
 import { setAlert } from './store/actions/alertActions';
-import { setError } from './store/actions/missionActions';
 import Header from './components/Header';
 import MissionFormPage from './pages/MissionFormPage';
 import MissionsPage from './pages/MissionsPage';
@@ -11,7 +10,6 @@ import { t } from './util';
 
 const App = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state: RootState) => state.mission.error);
   const alertMsg = useSelector((state: RootState) => state.alert.message);
 
   return (
@@ -27,9 +25,6 @@ const App = () => {
         </div>
         {alertMsg && (
           <Alert message={alertMsg} onClose={() => dispatch(setAlert(''))} />
-        )}
-        {error && (
-          <Alert message={error} onClose={() => dispatch(setError())} />
         )}
       </div>
     </Router>

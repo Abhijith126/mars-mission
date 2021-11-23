@@ -1,14 +1,4 @@
-import {
-  MissionState,
-  MissionAction,
-  GET_MISSION,
-  UPDATE_MISSION,
-  DELETE_MISSION,
-  SET_LOADING,
-  SET_ERROR,
-  ADD_MISSION,
-  GET_ALL_MISSION,
-} from '../../util/types';
+import { MissionState, MissionAction, GET_MISSION, UPDATE_MISSION, DELETE_MISSION, SET_LOADING, ADD_MISSION, GET_ALL_MISSION } from '../../util/types';
 
 const initialState: MissionState = {
   mission: null,
@@ -57,12 +47,6 @@ const missionReducer = (state = initialState, action: MissionAction): MissionSta
       return {
         ...state,
         loading: true,
-      };
-    case SET_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false,
       };
     default:
       return state;

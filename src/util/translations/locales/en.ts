@@ -64,7 +64,7 @@ const missions = {
     cancel: 'Cancel',
     new: 'New Mission',
     edit: 'Edit Mission',
-    newMember: 'New Member',
+    newMember: 'Add a new Member',
     create: 'Create',
   },
 };

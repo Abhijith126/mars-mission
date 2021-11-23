@@ -7,7 +7,7 @@ import {
   MissionError,
   GET_MISSION,
   SET_LOADING,
-  SET_ERROR,
+  SET_ALERT,
   SET_MISSION,
   DELETE_MISSION,
   UPDATE_MISSION,
@@ -32,7 +32,7 @@ export const getAllMissions = (): ThunkAction<void, RootState, null, MissionActi
       });
     } catch (err: any) {
       dispatch({
-        type: SET_ERROR,
+        type: SET_ALERT,
         payload: err.message,
       });
     }
@@ -56,7 +56,7 @@ export const getMissionById = (missionId: string): ThunkAction<void, RootState, 
       });
     } catch (err: any) {
       dispatch({
-        type: SET_ERROR,
+        type: SET_ALERT,
         payload: err.message,
       });
     }
@@ -80,7 +80,7 @@ export const updateMissionById = (missionId: string, mission: MissionData): Thun
       });
     } catch (err: any) {
       dispatch({
-        type: SET_ERROR,
+        type: SET_ALERT,
         payload: err.message,
       });
     }
@@ -104,7 +104,7 @@ export const createNewMission = (mission: MissionData): ThunkAction<void, RootSt
       });
     } catch (err: any) {
       dispatch({
-        type: SET_ERROR,
+        type: SET_ALERT,
         payload: err.message,
       });
     }
@@ -128,7 +128,7 @@ export const deleteMissionById = (missionId: string): ThunkAction<void, RootStat
       });
     } catch (err: any) {
       dispatch({
-        type: SET_ERROR,
+        type: SET_ALERT,
         payload: err.message,
       });
     }
@@ -147,12 +147,5 @@ export const setMissionData = (missionData: MissionData): ThunkAction<void, Root
 export const setLoading = (): MissionAction => {
   return {
     type: SET_LOADING,
-  };
-};
-
-export const setError = (): MissionAction => {
-  return {
-    type: SET_ERROR,
-    payload: '',
   };
 };

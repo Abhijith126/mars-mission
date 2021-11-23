@@ -38,6 +38,8 @@ const Button = (props: ButtonProps) => {
         return 'fa fa-pen';
       case 'back':
         return 'fa fa-undo';
+      case 'close':
+        return 'fa fa-times';
     }
   };
   return (
