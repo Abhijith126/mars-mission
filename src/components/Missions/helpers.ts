@@ -29,8 +29,8 @@ export const initialValues = {
   departure: moment(new Date()).format('YYYY-MM-DD'),
 };
 
-export const daysDiff = (date: string) => moment(new Date(date)).diff(new Date(), 'days');
-export const monthDiff = (date: string) => moment(new Date(date)).diff(new Date(), 'months');
+export const daysDiff = (date: string) => moment(new Date(date)).startOf('day').diff(moment(new Date()).startOf('day'), 'days');
+export const monthDiff = (date: string) => moment(new Date(date)).startOf('day').diff(moment(new Date()).startOf('day'), 'months');
 
 export const getDepartureDays = (date: string) => {
   const daysDif = daysDiff(date);
@@ -38,7 +38,7 @@ export const getDepartureDays = (date: string) => {
 
   return daysDif > 0
     ? monthsDiff > 3
-      ? ` in ${monthsDiff} ${t('missions.table.text.months')}`
-      : ` in ${daysDif} ${t('missions.table.text.days')}`
+      ? `in ${monthsDiff} ${t('missions.table.text.months')}`
+      : `in ${daysDif} ${t('missions.table.text.days')}`
     : t('missions.table.text.departed');
 };
